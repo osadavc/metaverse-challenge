@@ -1,15 +1,15 @@
-import Head from "next/head";
 import Login from "../components/Login";
+import { useMoralis } from "react-moralis";
 
 const Home = () => {
-  return (
-    <div>
-      <Head>
-        <title>Metaverse Challenge</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  const { isAuthenticated, isInitialized, logout } = useMoralis();
 
-      <Login />
+  if (!isAuthenticated || !isInitialized) return <Login />;
+
+  return (
+    <div className="h-screen">
+      <h1>Welcome To The App</h1>
+      <button onClick={logout}>Log Out</button>
     </div>
   );
 };
