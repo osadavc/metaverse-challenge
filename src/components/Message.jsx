@@ -5,7 +5,10 @@ import Avatar from "./Avatar";
 const Message = ({ message }) => {
   const { user } = useMoralis();
 
-  const isUserMessage = message.get("ethAddress") === user.get("ethAddress");
+  const isUserMessage =
+    message.get("user").get("ethAddress") === user.get("ethAddress");
+
+  console.log(message.get("user").get("username"));
 
   return (
     <div
@@ -13,7 +16,9 @@ const Message = ({ message }) => {
         isUserMessage && "justify-end"
       }`}
     >
-      <div className={`relative h-8 w-8 ${isUserMessage && "order-last ml-2"}`}>
+      <div
+        className={`relative h-10 w-10 ${isUserMessage && "order-last ml-2"}`}
+      >
         <Avatar />
       </div>
 
@@ -31,6 +36,7 @@ const Message = ({ message }) => {
         className={`text-[10px] italic text-gray-400 ${
           isUserMessage && "order-first pr-1"
         }`}
+        datetime={message.get("createdAt")}
       />
 
       <p
@@ -38,7 +44,7 @@ const Message = ({ message }) => {
           isUserMessage ? "text-pink-300" : "text-blue-400"
         }`}
       >
-        {message.get("username")}
+        {message.get("user").get("username")}
       </p>
     </div>
   );

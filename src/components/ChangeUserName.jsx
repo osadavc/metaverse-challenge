@@ -13,13 +13,13 @@ const ChangeUserName = () => {
   };
 
   return (
-    <div className="text-sm absolute top-5 right-5">
+    <div className="text-sm absolute top-5 right-5 bg-pink-700 px-3 py-2 font-bold rounded-full">
       <button
-        className="hover:text-pink-700 transition-colors"
+        className="hover:text-white text-gray-50 transition-colors"
         disabled={isUserUpdating}
         onClick={setUserName}
       >
-        Change Your Username
+        Edit Profile
       </button>
     </div>
   );

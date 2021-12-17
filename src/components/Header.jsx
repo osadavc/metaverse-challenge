@@ -7,7 +7,7 @@ const Header = () => {
   const { user } = useMoralis();
 
   return (
-    <div className="sticky top-0 p-5 z-50 bg-black shadow-sm border-b-2 border-b-pink-600 text-pink-500">
+    <div className="sticky top-0 p-5 z-50 bg-pink-400/10 backdrop-blur-sm shadow-sm border-b-2 border-b-pink-600 text-pink-500 md:rounded-b-md">
       <div className="grid grid-cols-5 md:grid-cols-6 md:items-end">
         <div className=" hidden md:inline-grid" />
 
