@@ -1,25 +1,19 @@
 import Login from "../components/Login";
 import { useMoralis } from "react-moralis";
+import Header from "../components/Header";
+import Messages from "../components/Messages";
 
 const Home = () => {
-  const { isAuthenticated, isInitialized, logout, user } = useMoralis();
+  const { isAuthenticated, isInitialized, logout } = useMoralis();
 
   if (!isAuthenticated || !isInitialized) return <Login />;
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center flex-col text-center space-y-3">
-      <h1 className="text-3xl">Welcome To The Metaverse 🚀</h1>
-      {user && (
-        <h2 className="text-xl">
-          Your Wallet Address Is {user.attributes.ethAddress}
-        </h2>
-      )}
-      <button
-        onClick={logout}
-        className="py-2 px-6 bg-yellow-500 rounded-lg text-zinc-50"
-      >
-        Log Out
-      </button>
+    <div className="h-screen w-full overflow-y-scroll bg-gradient-to-b from-black to-fuchsia-900 overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto">
+        <Header />
+        <Messages />
+      </div>
     </div>
   );
 };
