@@ -3,7 +3,7 @@ import { useMoralis } from "react-moralis";
 import Tilt from "react-tilt";
 
 const Login = () => {
-  const { authenticate } = useMoralis();
+  const { authenticate, isAuthenticating } = useMoralis();
 
   return (
     <div className="bg-black">
@@ -19,24 +19,30 @@ const Login = () => {
             width={250}
           />
           <button
-            className="bg-yellow-500 rounded-lg px-6 py-4 font-bold animate-pulse text-lg hover:bg-yellow-600 hover:animate-none transition-colors text-zinc-900 flex space-x-3 items-center justify-center"
+            className="bg-yellow-500 rounded-lg h-[60px] w-[275px] font-bold animate-pulse text-lg hover:bg-yellow-600 hover:animate-none transition-colors text-zinc-900 flex space-x-3 items-center justify-center"
             onClick={authenticate}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-              />
-            </svg>
-            <p>Login To The Metaverse</p>
+            {isAuthenticating ? (
+              <span>Loading</span>
+            ) : (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                  />
+                </svg>
+                <p>Login To The Metaverse</p>
+              </>
+            )}
           </button>
         </Tilt>
       </div>
