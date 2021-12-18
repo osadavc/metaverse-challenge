@@ -61,7 +61,7 @@ const MessageDialog = ({ isOpen, toggleOpen, message }) => {
               </span>
             </Dialog.Title>
 
-            <div className="mt-5 space-y-2 w-full">
+            <div className="mt-6 space-y-2 w-full">
               <div className="flex flex-col items-start space-y-1">
                 <label className="pl-3">Edit Message</label>
                 <input

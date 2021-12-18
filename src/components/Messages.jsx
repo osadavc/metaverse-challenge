@@ -2,14 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { ByMoralis, useMoralis, useMoralisQuery } from "react-moralis";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
+import TipsDialog from "./TipsDialog";
 
 const Messages = () => {
-  const { user, Moralis } = useMoralis();
+  const { user } = useMoralis();
   const endOfMessageRef = useRef();
 
   const [messages, setMessages] = useState([]);
+  const [isTipsOpen, setIsTipsOpen] = useState(false);
 
-  const { data, loading, error } = useMoralisQuery(
+  const { data } = useMoralisQuery(
     "Messages",
     (query) =>
       query
@@ -29,6 +31,12 @@ const Messages = () => {
       endOfMessageRef.current.scrollIntoView({ behavior: "smooth" });
     }, 300);
   }, [data]);
+
+  useEffect(() => {
+    if (localStorage.getItem("hasTipsOpened") == undefined) {
+      setIsTipsOpen(true);
+    }
+  }, []);
 
   return (
     <div className="pb-56 max-w-screen-2xl mx-auto">
@@ -54,6 +62,13 @@ const Messages = () => {
           <p>You're up to date {user.get("username")} 🎉</p>
         </div>
       </div>
+      <TipsDialog
+        isOpen={isTipsOpen}
+        toggleOpen={() => {
+          setIsTipsOpen((prev) => !prev);
+          localStorage.setItem("hasTipsOpened", true);
+        }}
+      />
     </div>
   );
 };
