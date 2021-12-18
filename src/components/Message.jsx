@@ -45,12 +45,14 @@ const Message = ({ message }) => {
           isUserMessage
             ? "rounded-br-none bg-pink-300 cursor-pointer"
             : "rounded-bl-none bg-blue-400"
-        }`}
+        } max-w-[80%]`}
         onClick={() => {
           isUserMessage && setIsMessageOpen(true);
         }}
       >
-        <p>{message.get("message")}</p>
+        <p className="break-words w-full inline-block">
+          {message.get("message")}
+        </p>
       </div>
 
       <TimeAgo
