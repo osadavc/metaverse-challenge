@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import TimeAgo from "timeago-react";
 import Avatar from "./Avatar";
+import ProfileDialog from "./ProfileDialog";
 
 const Message = ({ message }) => {
   const { user, Moralis } = useMoralis();
+  const [isOpen, setIsOpen] = useState(false);
 
   const isUserMessage =
     message.get("user").get("ethAddress") === user.get("ethAddress");
@@ -21,6 +23,7 @@ const Message = ({ message }) => {
     >
       <div
         className={`relative h-10 w-10 ${isUserMessage && "order-last ml-2"}`}
+        onClick={() => !isUserMessage && setIsOpen(true)}
       >
         <Avatar username={message.get("user").get("username")} />
       </div>
@@ -49,6 +52,14 @@ const Message = ({ message }) => {
       >
         {message.get("user").get("username")}
       </p>
+
+      <ProfileDialog
+        isOpen={isOpen}
+        toggleOpen={() => {
+          setIsOpen((prev) => !prev);
+        }}
+        user={message.get("user")}
+      />
     </div>
   );
 };
