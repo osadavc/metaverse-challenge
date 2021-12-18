@@ -9,13 +9,16 @@ const Message = ({ message }) => {
   const { user } = useMoralis();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
+  const [userDetails, setUserDetails] = useState();
 
   const isUserMessage =
     message.get("user").get("ethAddress") === user.get("ethAddress");
 
-  useEffect(async () => {
-    await message.get("user").fetch();
-  });
+  useEffect(() => {
+    (async () => {
+      setUserDetails(await message.get("user").fetch());
+    })();
+  }, [message]);
 
   return (
     <div
@@ -34,7 +37,7 @@ const Message = ({ message }) => {
         className={`relative h-10 w-10 ${isUserMessage && "order-last ml-2"}`}
         onClick={() => !isUserMessage && setIsProfileOpen(true)}
       >
-        <Avatar username={message.get("user").get("username")} />
+        <Avatar username={userDetails?.get("username")} />
       </div>
 
       <div
@@ -62,7 +65,7 @@ const Message = ({ message }) => {
           isUserMessage ? "text-pink-300" : "text-blue-400"
         }`}
       >
-        {message.get("user").get("username")}
+        {userDetails?.get("username")}
       </p>
 
       <ProfileDialog
@@ -70,7 +73,7 @@ const Message = ({ message }) => {
         toggleOpen={() => {
           setIsProfileOpen((prev) => !prev);
         }}
-        user={message.get("user")}
+        user={userDetails}
       />
     </div>
   );

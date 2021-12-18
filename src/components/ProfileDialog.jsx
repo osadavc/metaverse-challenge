@@ -39,24 +39,26 @@ const ProfileDialog = ({ isOpen, toggleOpen, user }) => {
         >
           <div className="relative bg-black/50 backdrop-blur-md rounded-lg max-w-sm text-center p-8 text-zinc-50 w-[400px] flex justify-center items-center flex-col">
             <Dialog.Title className="text-xl font-medium">
-              Viewing {user.get("username")}'s Profile
+              Viewing {user?.get("username")}'s Profile
             </Dialog.Title>
             <div className="relative h-28 w-28 mt-3">
-              <Avatar username={user.get("username")} />
+              <Avatar username={user?.get("username")} />
             </div>
 
             <div className="w-full mt-6 space-y-4">
               <div className="flex flex-col text-left">
                 <span className="text-sm">Username</span>
                 <span className="text-xl font-medium">
-                  {user.get("username")}
+                  {user?.get("username")}
                 </span>
               </div>
 
-              {user.get("bio") && (
+              {user?.get("bio") && (
                 <div className="flex flex-col text-left">
                   <span className="text-sm">Bio</span>
-                  <span className="text-xl font-medium">{user.get("bio")}</span>
+                  <span className="text-xl font-medium">
+                    {user?.get("bio")}
+                  </span>
                 </div>
               )}
 
