@@ -4,7 +4,7 @@ import { useMoralisQuery } from "react-moralis";
 import Avatar from "./Avatar";
 
 const ProfileDialog = ({ isOpen, toggleOpen, user }) => {
-  const { data, loading, error } = useMoralisQuery(
+  const { data } = useMoralisQuery(
     "Messages",
     (query) => query.equalTo("user", user),
     []

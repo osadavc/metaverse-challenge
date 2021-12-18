@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import TimeAgo from "timeago-react";
 import Avatar from "./Avatar";
+import MessageDialog from "./MessageDialog";
 import ProfileDialog from "./ProfileDialog";
 
 const Message = ({ message }) => {
-  const { user, Moralis } = useMoralis();
-  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useMoralis();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMessageOpen, setIsMessageOpen] = useState(false);
 
   const isUserMessage =
     message.get("user").get("ethAddress") === user.get("ethAddress");
@@ -21,9 +23,16 @@ const Message = ({ message }) => {
         isUserMessage && "justify-end"
       }`}
     >
+      <MessageDialog
+        isOpen={isMessageOpen}
+        toggleOpen={() => {
+          setIsMessageOpen((prev) => !prev);
+        }}
+        message={message}
+      />
       <div
         className={`relative h-10 w-10 ${isUserMessage && "order-last ml-2"}`}
-        onClick={() => !isUserMessage && setIsOpen(true)}
+        onClick={() => !isUserMessage && setIsProfileOpen(true)}
       >
         <Avatar username={message.get("user").get("username")} />
       </div>
@@ -31,9 +40,12 @@ const Message = ({ message }) => {
       <div
         className={`flex space-x-4 p-3 rounded-lg ${
           isUserMessage
-            ? "rounded-br-none bg-pink-300"
+            ? "rounded-br-none bg-pink-300 cursor-pointer"
             : "rounded-bl-none bg-blue-400"
         }`}
+        onClick={() => {
+          isUserMessage && setIsMessageOpen(true);
+        }}
       >
         <p>{message.get("message")}</p>
       </div>
@@ -54,9 +66,9 @@ const Message = ({ message }) => {
       </p>
 
       <ProfileDialog
-        isOpen={isOpen}
+        isOpen={isProfileOpen}
         toggleOpen={() => {
-          setIsOpen((prev) => !prev);
+          setIsProfileOpen((prev) => !prev);
         }}
         user={message.get("user")}
       />
