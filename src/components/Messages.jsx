@@ -4,7 +4,7 @@ import Message from "./Message";
 import SendMessage from "./SendMessage";
 
 const Messages = () => {
-  const { user } = useMoralis();
+  const { user, Moralis } = useMoralis();
   const endOfMessageRef = useRef();
 
   const [messages, setMessages] = useState([]);
@@ -13,8 +13,9 @@ const Messages = () => {
     "Messages",
     (query) =>
       query
+        .select("message", "createdAt", "user")
         .ascending("createdAt")
-        .greaterThan("createdAt", new Date(Date.now() - 1000 * 60 * 60 * 12)),
+        .greaterThan("createdAt", new Date(Date.now() - 1000 * 60 * 60 * 24)),
     [],
     {
       live: true,

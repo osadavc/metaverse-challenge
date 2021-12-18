@@ -40,7 +40,11 @@ const SendMessage = ({ endOfMessageRef, setMessages }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button type="submit" className="font-bold text-pink-500">
+      <button
+        type="submit"
+        className="font-bold text-pink-500 disabled:text-pink-300 disabled:cursor-not-allowed transition-colors"
+        disabled={!message}
+      >
         Send
       </button>
     </form>

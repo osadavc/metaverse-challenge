@@ -12,7 +12,7 @@ const Header = () => {
         <div className=" hidden md:inline-grid" />
 
         <div className="text-left md:text-center col-span-4">
-          <div className="w-48 h-48 relative md:mx-auto border-pink-500 border-4 rounded-full">
+          <div className="w-44 h-44 relative md:mx-auto border-pink-500 border-4 rounded-full">
             <Avatar logoutOnPress />
           </div>
 

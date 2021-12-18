@@ -1,14 +1,17 @@
+import { useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import TimeAgo from "timeago-react";
 import Avatar from "./Avatar";
 
 const Message = ({ message }) => {
-  const { user } = useMoralis();
+  const { user, Moralis } = useMoralis();
 
   const isUserMessage =
     message.get("user").get("ethAddress") === user.get("ethAddress");
 
-  console.log(message.get("user").get("username"));
+  useEffect(async () => {
+    await message.get("user").fetch();
+  });
 
   return (
     <div
@@ -19,7 +22,7 @@ const Message = ({ message }) => {
       <div
         className={`relative h-10 w-10 ${isUserMessage && "order-last ml-2"}`}
       >
-        <Avatar />
+        <Avatar username={message.get("user").get("username")} />
       </div>
 
       <div
