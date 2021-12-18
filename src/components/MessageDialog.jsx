@@ -71,18 +71,20 @@ const MessageDialog = ({ isOpen, toggleOpen, message }) => {
                   onChange={(e) => setEditingMessage(e.target.value)}
                 />
               </div>
-              <button
-                className="w-full border rounded-md h-[40px] transition-colors hover:bg-white hover:text-zinc-900 focus:ring-1 hover:font-medium focus:ring-white ring-opacity-20 ring-offset-slate-400"
-                onClick={updateMessage}
-              >
-                Update Message
-              </button>
-              <button
-                className="w-full bg-red-600 rounded-md h-[40px] transition-colors hover:bg-red-700 focus:ring-1 hover:font-medium focus:ring-red-500 ring-opacity-20 ring-offset-red-500"
-                onClick={deleteMessage}
-              >
-                Delete Message
-              </button>
+              <div className="space-y-2 !mt-4">
+                <button
+                  className="w-full border rounded-md h-[40px] transition-colors hover:bg-white hover:text-zinc-900 focus:ring-1 hover:font-medium focus:ring-white ring-opacity-20 ring-offset-slate-400"
+                  onClick={updateMessage}
+                >
+                  Update Message
+                </button>
+                <button
+                  className="w-full bg-red-600 rounded-md h-[40px] transition-colors hover:bg-red-700 focus:ring-1 hover:font-medium focus:ring-red-500 ring-opacity-20 ring-offset-red-500"
+                  onClick={deleteMessage}
+                >
+                  Delete Message
+                </button>
+              </div>
             </div>
           </div>
         </Transition.Child>
