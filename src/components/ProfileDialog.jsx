@@ -7,7 +7,7 @@ const ProfileDialog = ({ isOpen, toggleOpen, user }) => {
   const { data } = useMoralisQuery(
     "Messages",
     (query) => query.equalTo("user", user),
-    []
+    [user]
   );
 
   return (
