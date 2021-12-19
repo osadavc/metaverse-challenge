@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 
 const EditProfileDialog = ({ isOpen, toggleOpen, setUserData }) => {
@@ -7,6 +7,11 @@ const EditProfileDialog = ({ isOpen, toggleOpen, setUserData }) => {
 
   const [username, setUsername] = useState(user.get("username"));
   const [bio, setBio] = useState(user.get("bio"));
+
+  useEffect(() => {
+    setUsername(user.get("username"));
+    setBio(user.get("bio"));
+  }, [user]);
 
   return (
     <Transition appear show={isOpen}>
